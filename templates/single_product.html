@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+
+{% block body %}
+			<header id="top-bar" class="top-bar top-bar--style-2">
+				<div class="top-bar__bg" style="background-color: #FFF;background-image: url(img/top_bar_bg-2.png);background-repeat: no-repeat;background-position: center bottom;"></div>
+
+				<div class="container position-relative">
+					<div class="row justify-content-between no-gutters">
+
+						<a class="top-bar__logo site-logo" href="/">
+							<img class="img-fluid" src="img/site_logo.png" alt="demo" />
+						</a>
+
+						<a id="top-bar__navigation-toggler" class="top-bar__navigation-toggler top-bar__navigation-toggler--dark" href="javascript:void(0);"><span></span></a>
+
+						<div id="top-bar__inner" class="top-bar__inner  text-lg-right">
+							<div>
+								<div class="d-lg-flex flex-lg-column-reverse align-items-lg-end">
+									<nav id="top-bar__navigation" class="top-bar__navigation navigation" role="navigation">
+										<ul>
+											<li>
+												<a href="/">Главная</a>
+											</li>
+
+											<!-- <li><a href="shop_catalog.html">Каталог</a></li> -->
+											{% if session['is_admin'] %}
+											<li>
+												<a href="/admin_panel">Панель Админа</a>
+											</li>
+											{% endif %}
+
+											<li>
+												<a href="/catalog">Каталог</a>
+											</li>
+											
+											<!-- <li class="li-cart">
+												<a href="/cart"><i class="fontello-shopping-bag"></i><span class="total">0</span></a>
+											</li> -->
+
+											<li class="li-exit">
+												<a href="/logout">Выйти</a>
+											</li>
+
+										</ul>
+									</nav>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</header>
+
+			<div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 100%" style="background-image: url(img/intro_img/12.jpg);color: #333;">
+				<div class="container">
+					<div class="row">
+						<div class="col-12 col-md-7">
+							<h1 class="__title"><span>Агро</span>{{seed.seed_id}} ~ {{seed.seed_name}}</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<main role="main">
+				<link rel="stylesheet" href="css/style.min.css" type="text/css">
+
+				<script>
+					(function(w, d){
+						var m = d.getElementsByTagName('main')[0],
+							s = d.createElement("script"),
+							v = !("IntersectionObserver" in w) ? "8.17.0" : "10.19.0",
+							o = {
+								elements_selector: ".lazy",
+								data_src: 'src',
+								data_srcset: 'srcset',
+								threshold: 500,
+								callback_enter: function (element) {
+
+								},
+								callback_load: function (element) {
+									element.removeAttribute('data-src')
+
+									oTimeout = setTimeout(function ()
+									{
+										clearTimeout(oTimeout);
+
+										AOS.refresh();
+									}, 1000);
+								},
+								callback_set: function (element) {
+
+								},
+								callback_error: function(element) {
+									element.src = "https://placeholdit.imgix.net/~text?txtsize=21&txt=Image%20not%20load&w=200&h=200";
+								}
+							};
+						s.type = 'text/javascript';
+						s.async = true; // This includes the script as async. See the "recipes" section for more information about async loading of LazyLoad.
+						s.src = "https://cdn.jsdelivr.net/npm/vanilla-lazyload@" + v + "/dist/lazyload.min.js";
+						m.appendChild(s);
+						// m.insertBefore(s, m.firstChild);
+						w.lazyLoadOptions = o;
+					}(window, document));
+				</script>
+
+				<section class="section">
+					<div class="decor-el decor-el--1" data-jarallax-element="-70" data-speed="0.2">
+						<img class="lazy" width="286" height="280" src="img/blank.gif" data-src="img/decor-el_1.jpg" alt="demo"/>
+					</div>
+
+					<div class="decor-el decor-el--2" data-jarallax-element="-70" data-speed="0.2">
+						<img class="lazy" width="99" height="88" src="img/blank.gif" data-src="img/decor-el_2.jpg" alt="demo"/>
+					</div>
+
+					<div class="decor-el decor-el--3" data-jarallax-element="-70" data-speed="0.2">
+						<img class="lazy" width="115" height="117" src="img/blank.gif" data-src="img/decor-el_3.jpg" alt="demo"/>
+					</div>
+
+					<div class="decor-el decor-el--4" data-jarallax-element="-70" data-speed="0.2">
+						<img class="lazy" width="84" height="76" src="img/blank.gif" data-src="img/decor-el_4.jpg" alt="demo"/>
+					</div>
+
+					<div class="decor-el decor-el--5" data-jarallax-element="-70" data-speed="0.2">
+						<img class="lazy" width="248" height="309" src="img/blank.gif" data-src="img/decor-el_5.jpg" alt="demo"/>
+					</div>
+
+					<div class="container">
+						<div class="row">
+							<div class="col-12 col-md-8 col-lg-9">
+
+								<div class="product-single">
+									<div class="row">
+										<div class="col-12 col-lg-7">
+											<div class="__product-img">
+												<img width="330" src="img/goods_img/2.jpg" alt="demo" />
+
+												<span class="product-label product-label--new">New</span>
+											</div>
+										</div>
+
+										<div class="col-12 col-lg-5">
+											<div class="content-container">
+												<h3 class="__name">{{seed.seed_name}}</h3>
+
+												<div class="product-price">
+													<span class="product-price__item product-price__item--new">{{seed.price}}тг</span>
+												</div>
+
+												<div class="rating">
+													<span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
+													<span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
+													<span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
+													<span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
+													<span class="rating__item"><i class="fontello-star"></i></span>
+												</div>
+
+												<form class="__add-to-cart" action="#">
+													<div class="quantity-counter js-quantity-counter">
+														<span class="__btn __btn--minus"></span>
+														<input class="__q-input" type="text" value="1" />
+														<span class="__btn __btn--plus"></span>
+														тонна
+													</div>
+
+													<button class="custom-btn custom-btn--tiny custom-btn--style-2" type="submit" role="button">Обращаться по номеру {{seed.phone}}</button>
+												</form>
+											</div>
+										</div>
+
+										<div class="col-12">
+											<div class="spacer py-5 py-md-9"></div>
+
+											<div class="tab-container">
+												<nav class="tab-nav">
+													<a href="#">Описание</a>
+												</nav>
+
+												<div class="tab-content">
+													<div class="tab-content__item is-visible">
+														<div class="description-table" style="max-width: 370px;">
+															<table>
+																<tbody>
+																	<tr>
+																		<td>Общий вес</td>
+																		<td>{{seed.total_weight}}тн</td>
+																	</tr>
+																	<tr>
+																	<td>Класс</td>
+																		<td>{{seed.seed_class}}</td>
+																	</tr>	
+																	<tr>
+																	<td>Телефон</td>
+																		<td>{{seed.phone}}</td>
+																	</tr>
+																	<tr>
+																		<td>Местонахождение</td>
+																		<td>{{seed.place}}</td>
+																	</tr>											
+																</tbody>
+															</table>
+														</div>
+													</div>
+
+												</div>
+											</div>
+
+											<div class="spacer py-5 py-md-9"></div>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</section>
+			</main>
+{% endblock %}

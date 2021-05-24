@@ -1,0 +1,354 @@
+{% extends 'base.html' %}
+
+{% block body %}
+			<header id="top-bar" class="top-bar top-bar--style-2">
+				<div class="top-bar__bg" style="background-color: #FFF;background-image: url(img/top_bar_bg-2.png);background-repeat: no-repeat;background-position: center bottom;"></div>
+
+				<div class="container position-relative">
+					<div class="row justify-content-between no-gutters">
+
+						<a class="top-bar__logo site-logo" href="/">
+							<img class="img-fluid" src="img/site_logo.png" alt="demo" />
+						</a>
+
+						<a id="top-bar__navigation-toggler" class="top-bar__navigation-toggler top-bar__navigation-toggler--dark" href="javascript:void(0);"><span></span></a>
+
+						<div id="top-bar__inner" class="top-bar__inner  text-lg-right">
+							<div>
+								<div class="d-lg-flex flex-lg-column-reverse align-items-lg-end">
+									<nav id="top-bar__navigation" class="top-bar__navigation navigation" role="navigation">
+										<ul>
+											<li>
+												<a href="/">Главная</a>
+											</li>
+
+											<!-- <li><a href="shop_catalog.html">Каталог</a></li> -->
+											{% if session['is_admin'] %}
+											<li>
+												<a href="/admin_panel">Панель Админа</a>
+											</li>
+											{% endif %}
+											
+											<!-- <li class="li-cart">
+												<a href="/cart"><i class="fontello-shopping-bag"></i><span class="total">0</span></a>
+											</li> -->
+
+											<li class="li-exit">
+												<a href="/logout">Выйти</a>
+											</li>
+
+										</ul>
+									</nav>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</header>
+
+			<div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 80%" style="background-image: url(img/intro_img/12.jpg);color: #333;">
+				<div class="container">
+					<div class="row">
+						<div class="col-12 col-md-7">
+							<h1 class="__title"><span>АГРО</span> Каталог</h1>
+							<h4><small> Welcome {{session.sessionusername}}</small></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end hero -->
+
+			<!-- start main -->
+			<main role="main">
+				<!-- Common styles
+				================================================== -->
+				<link rel="stylesheet" href="css/style.min.css" type="text/css">
+
+				<!-- Load lazyLoad scripts
+				================================================== -->
+				<script>
+					(function(w, d){
+						var m = d.getElementsByTagName('main')[0],
+							s = d.createElement("script"),
+							v = !("IntersectionObserver" in w) ? "8.17.0" : "10.19.0",
+							o = {
+								elements_selector: ".lazy",
+								data_src: 'src',
+								data_srcset: 'srcset',
+								threshold: 500,
+								callback_enter: function (element) {
+
+								},
+								callback_load: function (element) {
+									element.removeAttribute('data-src')
+
+									oTimeout = setTimeout(function ()
+									{
+										clearTimeout(oTimeout);
+
+										AOS.refresh();
+									}, 1000);
+								},
+								callback_set: function (element) {
+
+								},
+								callback_error: function(element) {
+									element.src = "https://placeholdit.imgix.net/~text?txtsize=21&txt=Image%20not%20load&w=200&h=200";
+								}
+							};
+						s.type = 'text/javascript';
+						s.async = true; // This includes the script as async. See the "recipes" section for more information about async loading of LazyLoad.
+						s.src = "https://cdn.jsdelivr.net/npm/vanilla-lazyload@" + v + "/dist/lazyload.min.js";
+						m.appendChild(s);
+						// m.insertBefore(s, m.firstChild);
+						w.lazyLoadOptions = o;
+					}(window, document));
+				</script>
+
+				<section class="section">
+					<div class="decor-el decor-el--1" data-jarallax-element="-70" data-speed="0.2">
+						<img class="lazy" width="286" height="280" src="img/blank.gif" data-src="img/decor-el_1.jpg" alt="demo"/>
+					</div>
+
+					<div class="decor-el decor-el--2" data-jarallax-element="-70" data-speed="0.2">
+						<img class="lazy" width="99" height="88" src="img/blank.gif" data-src="img/decor-el_2.jpg" alt="demo"/>
+					</div>
+
+					<div class="decor-el decor-el--3" data-jarallax-element="-70" data-speed="0.2">
+						<img class="lazy" width="115" height="117" src="img/blank.gif" data-src="img/decor-el_3.jpg" alt="demo"/>
+					</div>
+
+					<div class="decor-el decor-el--4" data-jarallax-element="-70" data-speed="0.2">
+						<img class="lazy" width="84" height="76" src="img/blank.gif" data-src="img/decor-el_4.jpg" alt="demo"/>
+					</div>
+
+					<div class="decor-el decor-el--5" data-jarallax-element="-70" data-speed="0.2">
+						<img class="lazy" width="248" height="309" src="img/blank.gif" data-src="img/decor-el_5.jpg" alt="demo"/>
+					</div>
+
+					<div class="container">
+						<div class="goods-catalog">
+							<div class="row">
+								<div class="col-12 col-md-4 col-lg-3">
+									<aside class="sidebar goods-filter">
+										<span class="goods-filter-btn-close js-toggle-filter"><i class="fontello-cancel"></i></span>
+
+										<div class="goods-filter__inner">
+											
+											
+											<!-- <select name="search_filter" id="search_filter" class="form-control">
+											<option value="">Все товары</option>';
+											{% for row in seed %}
+												<option value="{{row.seed_name}}">{{row.seed_name}}</option>';    
+											{% endfor %}
+											</select>
+											<input type="hidden" name="hidden_value" id="hidden_value" />
+											<div style="clear:both"></div> -->
+											<div class="panel-heading">
+											<button type="button" class="custom-btn custom-btn--tiny custom-btn--style-2" data-toggle="modal" data-target="#exampleModal2">
+												Подать товар на заявку
+											</button>
+											</div>
+
+
+											<!-- <div class="widget widget--search">
+												<form class="form--horizontal" action="/search" method="POST">
+													<div class="input-wrp">
+														<input class="textfield" name="search_product" id="search_product" type="text" placeholder="товар" />
+													</div>
+
+													<button class="custom-btn custom-btn--tiny custom-btn--style-1" type="submit" role="button">Найти</button>
+												</form>
+											</div> -->
+
+											<div class="widget widget--categories">
+												<h4 class="h6 widget-title">Категорий</h4>
+
+												<ul class="list">
+													{% for row in list_seed %}
+													<li class="list__item">
+														<a class="list__item__link" href="/catalog?seed_name={{row._id}}">{{ row._id }}</a>
+														<span>{{row.total}}</span>
+													</li>
+													{% endfor %}
+												</ul>
+											</div>
+											
+											<div class="widget">
+												<div class="row no-gutters align-items-center">
+													<div class="col-2">
+														<form  onsubmit="window.location = '/catalog?price1=' + price1.value + '&price2='+price2.value;">
+															<!-- action="/catalog" method="post" -->
+															<input type="text" id="price1" 	name="price1" placeholder="Цена от" />
+															<input type="text" id="price2" 	name="price2" placeholder="Цена до" />
+															<button class="custom-btn custom-btn--tiny custom-btn--style-2"  role="button" type="submit">Показать</button>
+														</form>
+													</div>
+												</div>
+											</div>
+											<div class="col-auto">
+												<a class="clear-filter" href="/catalog">Убрать</a>
+											</div>
+									
+										</div>
+									</aside>
+								</div>
+
+								<div class="col-12 col-md-8 col-lg-9">
+									<div class="spacer py-6 d-md-none"></div>
+
+									<div class="row align-items-center justify-content-between">
+										<div class="col-auto">
+											<span class="goods-filter-btn-open js-toggle-filter"><i class="fontello-filter"></i>Filter</span>
+										</div>
+
+										<div class="col-auto">
+											<!-- start ordering -->
+											<form class="ordering" action="#">
+												<div class="input-wrp">
+													<select class="textfield wide js-select">
+														<option value="1">Обычная сортировка</option>
+														<option value="2">Цена возрастание</option>
+														<option value="3">Цена убывания</option>
+														<option value="3">По новизне</option>
+													</select>
+												</div>
+											</form>
+											<!-- end ordering -->
+										</div>
+									</div>
+									
+
+									<div class="spacer py-3"></div>
+									<div class="goods goods--style-1">
+										<div class="__inner">
+											<div class="row">
+												{% for row in seed %}
+												<div class="col-12 col-sm-6 col-lg-4">
+													<div class="__item">
+														<figure class="__image">
+															<img class="lazy" width="188" src="img/blank.gif" data-src="img/goods_img/1.jpeg" alt="demo" />
+														</figure>
+
+														<div class="__content">
+															<h3 class="h5 __title"><a href="/product?seed_id={{row.seed_id}}">{{row.seed_name}} - класс {{row.seed_class}}</a></h3>
+															<h4 class="h6 __title">Место: {{row.place}}</h4>
+															<div class="product-price">
+																<span class="product-price__item product-price__item--new">{{row.price}} тг</span>
+															</div>
+
+															<a class="custom-btn custom-btn--medium custom-btn--style-2" href="/product?seed_id={{row.seed_id}}">Подробнее</a>
+														</div>
+													</div>
+												</div>
+												{% endfor %}
+												
+											
+											</div>
+										</div>
+									</div>
+
+<!-- 
+									<div class="spacer py-5"></div>
+
+									<nav aria-label="Page navigation example">
+										<ul class="pagination justify-content-center">
+											<li class="page-item"><a class="page-link" href="#">1</a></li>
+											<li class="page-item active"><a class="page-link" href="#">2</a></li>
+											<li class="page-item"><a class="page-link" href="#">3</a></li>
+											<li class="page-item"><a class="page-link" href="#">4</a></li>
+											<li class="page-item"><a class="page-link" href="#"><i class="fontello-angle-right"></i></a></li>
+										</ul>
+									</nav> -->
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+			</main>
+			<!-- <script>
+				$(document).ready(function(){
+					load_data();
+					function load_data(query='')
+					{
+						$.ajax({
+							url:"/fetchrecords",
+							method:"POST",
+							data:{query:query},
+							success:function(data)
+							{ 
+								$('tbody').html(data);
+								$('tbody').append(data.htmlresponse);
+							}
+						})
+					}
+				 
+					$('#search_filter').change(function(){
+						$('#hidden_value').val($('#search_filter').val());
+						var query = $('#hidden_value').val(); 
+						load_data(query);
+					});
+					 
+				});
+				</script> -->
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title" id="exampleModalLabel2">Подать товар на заявку</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  <form role="form" method="post" action="/add_request_seed">
+					<div class="form-group">
+					  <label class="col-form-label">Имя:</label>
+					  <input type="text" class="form-control" id="txtname" name="txtname">
+					</div>
+					<div class="form-group">
+					  <label class="col-form-label">Центнеров:</label>
+					  <input type="text" class="form-control" id="txthundredweight" name="txthundredweight">
+					</div>
+					<div class="form-group">
+					  <label class="col-form-label">Класс:</label>
+					  <input type="text" class="form-control" id="seed_class" name="seed_class">
+					</div>
+					<div class="form-group">
+					  <label class="col-form-label">Цена:</label>
+					  <input type="text" class="form-control" id="price" name="price">
+					</div>
+					<div class="form-group">
+					  <label class="col-form-label">Место:</label>
+					  <input type="text" class="form-control" id="place" name="place">
+					</div>
+					<div class="form-group">
+						<label class="col-form-label">Телефон:</label>
+						<input type="text" class="form-control" id="phone" name="phone">
+					  </div>
+					  <div class="form-group">
+						<label class="col-form-label">Общий вес:</label>
+						<input type="text" class="form-control" id="total_weight" name="total_weight">
+					  </div>
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+				  <input name="cmdsubmit" class="btn btn-primary" type="submit" value="Отправить" />
+				  </form>
+				</div>
+			  </div>
+			</div>
+		  </div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>  
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.js"></script>
+
+{% endblock %}

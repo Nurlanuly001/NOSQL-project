@@ -1,0 +1,102 @@
+
+{% extends 'base.html' %}
+
+
+{% block body %}
+			<header id="top-bar" class="top-bar top-bar--style-2">
+				<!--><div class="top-bar__bg" style="background-color: #FFF;background-image: url(img/top_bar_bg-2.png);background-repeat: no-repeat;background-position: center bottom;"></div><!-->
+
+				<div class="container position-relative">
+					<div class="row justify-content-between no-gutters">
+
+						<a class="top-bar__logo site-logo" href="/">
+							<img class="img-fluid" src="img/site_logo.png" alt="demo" />
+						</a>
+
+						<a id="top-bar__navigation-toggler" class="top-bar__navigation-toggler top-bar__navigation-toggler--dark" href="javascript:void(0);"><span></span></a>
+
+						<div id="top-bar__inner" class="top-bar__inner  text-lg-right">
+							<div>
+								<div class="d-lg-flex flex-lg-column-reverse align-items-lg-end">
+									<nav id="top-bar__navigation" class="top-bar__navigation navigation" role="navigation">
+										<ul>
+											<li>
+												<a href="/">Главная</a>
+											</li>
+
+											<li><a href="/catalog">Каталог</a></li>
+
+											<li class="li-profile">
+												<a href="/register"><i class="fontello-profile"></i></a>
+											</li>
+										</ul>
+									</nav>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</header>
+			<!-- start hero -->
+			<div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 80%" style="background-image: url(img/intro_img/9.jpg);">
+				<div class="container">
+					<div class="row">
+						<div class="col-12 col-lg-7">
+							<h3 class="__title"><span>Страница</span> 404 не найдена</h3>
+							<h3>{{error}}</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end hero -->
+
+			<!-- start main -->
+			<main role="main" class="page-404">
+				<!-- Common styles
+				================================================== -->
+				<link rel="stylesheet" href="css/style.min.css" type="text/css">
+
+				<!-- Load lazyLoad scripts
+				================================================== -->
+				<script>
+					(function(w, d){
+						var m = d.getElementsByTagName('main')[0],
+							s = d.createElement("script"),
+							v = !("IntersectionObserver" in w) ? "8.17.0" : "10.19.0",
+							o = {
+								elements_selector: ".lazy",
+								data_src: 'src',
+								data_srcset: 'srcset',
+								threshold: 500,
+								callback_enter: function (element) {
+
+								},
+								callback_load: function (element) {
+									element.removeAttribute('data-src')
+
+									oTimeout = setTimeout(function ()
+									{
+										clearTimeout(oTimeout);
+
+										AOS.refresh();
+									}, 1000);
+								},
+								callback_set: function (element) {
+
+								},
+								callback_error: function(element) {
+									element.src = "https://placeholdit.imgix.net/~text?txtsize=21&txt=Image%20not%20load&w=200&h=200";
+								}
+							};
+						s.type = 'text/javascript';
+						s.async = true; // This includes the script as async. See the "recipes" section for more information about async loading of LazyLoad.
+						s.src = "https://cdn.jsdelivr.net/npm/vanilla-lazyload@" + v + "/dist/lazyload.min.js";
+						m.appendChild(s);
+						// m.insertBefore(s, m.firstChild);
+						w.lazyLoadOptions = o;
+					}(window, document));
+				</script>
+				<!-- start section -->
+			</main>
+{% endblock %}

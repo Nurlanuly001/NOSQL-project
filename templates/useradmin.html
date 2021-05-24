@@ -1,0 +1,383 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Admin</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>  
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.js"></script>
+<script type="text/javascript" language="javascript">
+$(document).ready(function(){
+    var dataTable = $('#sample_data').DataTable();
+    $('#sample_data').editable({
+        container:'body',
+        selector:'td.name',
+        url:'/update_user',
+        title:'Name',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'Это поле обязательное!';
+            }
+        }
+    });
+
+    var dataTable2 = $('#sample_data2').DataTable();
+    $('#sample_data2').editable({
+        container:'body',
+        selector:'td.seed_name',
+        url:'/update_seed',
+        title:'seed_name',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'Это поле обязательное!';
+            }
+        }
+    });
+ 
+    $('#sample_data').editable({
+        container:'body',
+        selector:'td.email',
+        url:'/update_user',
+        title:'Email',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'Это поле обязательное!';
+            }
+        }
+    });
+
+    $('#sample_data2').editable({
+        container:'body',
+        selector:'td.hundredweight',
+        url:'/update_seed',
+        title:'hundredweight',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'Это поле обязательное!';
+            }
+        }
+    });
+
+    $('#sample_data').editable({
+        container:'body',
+        selector:'td.is_admin',
+        url:'/update_user',
+        title:'is_admin',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'Это поле обязательное!';
+            }
+        }
+    });
+
+    $('#sample_data2').editable({
+        container:'body',
+        selector:'td.seed_class',
+        url:'/update_seed',
+        title:'seed_class',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'Это поле обязательное!';
+            }
+        }
+    });
+
+        $('#sample_data2').editable({
+        container:'body',
+        selector:'td.phone',
+        url:'/update_seed',
+        title:'phone',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'Это поле обязательное!';
+            }
+        }
+    });
+     $('#sample_data2').editable({
+        container:'body',
+        selector:'td.total_weight',
+        url:'/update_seed',
+        title:'total_weight',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'Это поле обязательное!';
+            }
+        }
+    });
+
+    $('#sample_data2').editable({
+        container:'body',
+        selector:'td.price',
+        url:'/update_seed',
+        title:'price',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'Это поле обязательное!';
+            }
+        }
+    });
+
+    $('#sample_data2').editable({
+        container:'body',
+        selector:'td.place',
+        url:'/update_seed',
+        title:'place',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'Это поле обязательное!';
+            }
+        }
+    });
+}); 
+function del_user(email, name){
+    if (confirm("Ты уверен что хочешь удалить '" + name + "'")){
+        window.location.href = '/delete_user/' + email;
+    }
+}
+function del_seed(seed_id, seed_name){
+    if (confirm("Ты уверен что хочешь удалить '" + seed_name + "'")){
+        window.location.href = '/delete_seed/' + seed_id;
+    }
+}
+function confirm_seed(seed_id, seed_name,hundredweight,seed_class,price,place,phone,total_weight){
+  window.location.href = '/confirm_seed?seed_id=' + seed_id + '&seed_name='+seed_name+'&hundredweight='+hundredweight+'&seed_class='+seed_class+'&price='+price+'&place='+place+'&phone='+phone+'&total_weight='+total_weight;
+}
+</script>
+    </head>
+      
+    <header>
+      <div class="container">
+        <div class="row align-items-center justify-content-between">
+          <nav style="margin-top: 20px;margin-bottom: 15px;">
+            <button type="button"><a href='/'>Главная</a></button>
+            <button type="button"><a href="/catalog">Каталог</a></button>
+            <button type="button"><a href="/logout">Выйти</a></button>
+          </nav>
+       </div>
+      </div>
+    </header>
+    <body>
+        <div class="container">
+          <h3 align="center">Добро пожаловать админ!</h3>
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                  Добавить пользователя
+                </button>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table id="sample_data" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Имя</th>
+                                    <th>Почта</th>
+                                    <th>Пароль</th>
+                                    <th>Дата Рег.</th>
+                                    <th>Админ(1=да,0=нет)</th>
+                                    <th>Удалить</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in user %}
+                                <tr>
+                                    <td data-name="name" class="name" data-type="text" data-pk="{{row.email}}">{{row.name}}</td>
+                                    <td data-name="email" class="email" data-type="text" data-pk="{{row.email}}">{{row.email}}</td>
+                                    <td data-name="password" class="password" data-type="text" data-pk="{{row.email}}">{{row.password}}</td>
+                                    <td data-name="reg_date" class="reg_date" data-type="text" data-pk="{{row.email}}">{{row.reg_date}}</td>
+                                    <td data-name="is_admin" class="is_admin" data-type="text" data-pk="{{row.email}}">{{row.is_admin}}</td>
+                                    <td><a href="javascript:del_user('{{row.email}}','{{row.name}}')" class="btn btn-primary">Delete</a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+             
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Добавить пользователя</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form role="form" method="post" action="/add_user">
+                <div class="form-group">
+                  <label class="col-form-label">Имя:</label>
+                  <input type="text" class="form-control" id="txtname" name="txtname">
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label">Почта:</label>
+                  <input type="text" class="form-control" id="txtemail" name="txtemail">
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label">Пароль:</label>
+                  <input type="text" class="form-control" id="txtpassword" name="txtpassword">
+                </div>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+              <input name="cmdsubmit" class="btn btn-primary" type="submit" value="Отправить" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <h4 align="center">Товар:Зерно</h4>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
+            Добавить товар
+          </button>
+          </div>
+          <div class="panel-body">
+              <div class="table-responsive">
+                  <table id="sample_data2" class="table table-bordered table-striped">
+                      <thead>
+                          <tr>
+                              <th>Номер</th>
+                              <th>Имя</th>
+                              <th>Центнеров</th>
+                              <th>Класс</th>
+                              <th>Цена</th>
+                              <th>Место</th>
+                              <th>Телефон</th>
+                              <th>Общий вес</th>
+                              <th>Удалить</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {% for row in seed %}
+                          <tr>
+                            <td data-name="seed_id" class="seed_id" data-type="text" data-pk="{{row.seed_id}}">{{row.seed_id}}</td>
+                              <td data-name="seed_name" class="seed_name" data-type="text" data-pk="{{row.seed_id}}">{{row.seed_name}}</td>
+                              <td data-name="hundredweight" class="hundredweight" data-type="text" data-pk="{{row.seed_id}}">{{row.hundredweight}}</td>
+                              <td data-name="seed_class" class="seed_class" data-type="text" data-pk="{{row.seed_id}}">{{row.seed_class}}</td>
+                              <td data-name="price" class="price" data-type="text" data-pk="{{row.seed_id}}">{{row.price}}</td>
+                              <td data-name="place" class="place" data-type="text" data-pk="{{row.seed_id}}">{{row.place}}</td>
+                              <td data-name="phone" class="phone" data-type="text" data-pk="{{row.seed_id}}">{{row.phone}}</td>
+                              <td data-name="total_weight" class="total_weight" data-type="text" data-pk="{{row.seed_id}}">{{row.total_weight}}</td>
+                              <td><a href="javascript:del_seed('{{row.seed_id}}','{{row.seed_name}}')" class="btn btn-primary">Delete</a></td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+      <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel2">Добавить Товар</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form role="form" method="post" action="/add_seed">
+                <div class="form-group">
+                  <label class="col-form-label">Имя:</label>
+                  <input type="text" class="form-control" id="txtname" name="txtname">
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label">Центнеров:</label>
+                  <input type="text" class="form-control" id="txthundredweight" name="txthundredweight">
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label">Класс:</label>
+                  <input type="text" class="form-control" id="seed_class" name="seed_class">
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label">Цена:</label>
+                  <input type="text" class="form-control" id="price" name="price">
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label">Место:</label>
+                  <input type="text" class="form-control" id="place" name="place">
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label">Телефон:</label>
+                  <input type="text" class="form-control" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label">Общий вес:</label>
+                  <input type="text" class="form-control" id="total_weight" name="total_weight">
+                </div>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+              <input name="cmdsubmit" class="btn btn-primary" type="submit" value="Отправить" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <h4 align="center">Товары на заявку от хозяйств</h4>
+        <div class="panel panel-default">
+          <div class="panel-body">
+              <div class="table-responsive">
+                  <table id="sample_data3" class="table table-bordered table-striped">
+                      <thead>
+                          <tr>
+                              <th>Номер</th>
+                              <th>Имя</th>
+                              <th>Центнеров</th>
+                              <th>Класс</th>
+                              <th>Цена</th>
+                              <th>Место</th>
+                              <th>Телефон</th>
+                              <th>Общий вес</th>
+                              <th></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {% for row in request_product %}
+                          <tr>
+                            <td data-name="seed_id" class="seed_id" data-type="text" data-pk="{{row.seed_id}}">{{row.seed_id}}</td>
+                              <td data-name="seed_name" class="seed_name" data-type="text" data-pk="{{row.seed_id}}">{{row.seed_name}}</td>
+                              <td data-name="hundredweight" class="hundredweight" data-type="text" data-pk="{{row.seed_id}}">{{row.hundredweight}}</td>
+                              <td data-name="seed_class" class="seed_class" data-type="text" data-pk="{{row.seed_id}}">{{row.seed_class}}</td>
+                              <td data-name="price" class="price" data-type="text" data-pk="{{row.seed_id}}">{{row.price}}</td>
+                              <td data-name="place" class="place" data-type="text" data-pk="{{row.seed_id}}">{{row.place}}</td>
+                              <td data-name="phone" class="phone" data-type="text" data-pk="{{row.seed_id}}">{{row.phone}}</td>
+                              <td data-name="total_weight" class="total_weight" data-type="text" data-pk="{{row.seed_id}}">{{row.total_weight}}</td>
+                              <td><a href="javascript:confirm_seed('{{row.seed_id}}','{{row.seed_name}}','{{row.hundredweight}}','{{row.seed_class}}','{{row.price}}','{{row.place}}','{{row.phone}}','{{row.total_weight}}')" class="btn btn-primary">Одобрить</a></td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          </div>
+    </body>
+</html>
